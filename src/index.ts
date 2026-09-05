@@ -14,8 +14,7 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-
-console.log("made some changes in the github trying to see how it works");
+console.log("edited in github")
 
 app.use("/api/auth/v1", authRouter);
 
