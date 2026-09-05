@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
+console.log("edited in github")
+
 app.use("/api/auth/v1", authRouter);
 
 const PORT = process.env.PORT;
