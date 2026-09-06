@@ -1,30 +1,44 @@
 import express from "express";
-import { Login } from "../controllers/auth.controller.js";
+import { BusinessSignUp } from "../controllers/auth.controller.js";
 import passport from "../config/passport.js";
+import jwt from "jsonwebtoken";
+import { createBusinessAcctValidate } from "../middleware/auth.middleware.js";
+import { createBusinessUser } from "../validators/validators.js";
 
 const authRouter = express.Router();
 
-authRouter.route("/login").post(Login);
-
-authRouter.get(
-  "/google",
-  passport.authenticate("google", { scope: ["email", "profile"] }),
+authRouter.post(
+  "/signup",
+  createBusinessAcctValidate(createBusinessUser),
+  BusinessSignUp,
 );
 
+// authRouter.get(
+//   "/google",
+//   passport.authenticate("google", { scope: ["email", "profile"] }),
+// );
 
-authRouter.get(
-  "/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/login",
-    session: false,
-  }),
-  (req, res) => {
-    console.log(req.user);
-    console.log(req);
+// authRouter.get(
+//   "/google/callback",
+//   passport.authenticate("google", {
+//     failureRedirect: "/login",
+//     session: false,
+//   }),
+//   (req, res) => {
+//     console.log(req.user);
 
-    res.redirect("/");
-    
-  },
-);
+//     const token = jwt.sign(
+//       { user: req.user },
+//       process.env.JWT_SECRET as string,
+//       {
+//         expiresIn: "1h",
+//       },
+//     );
+
+//     console.log(token);
+
+//     res.redirect("/");
+//   },
+// );
 
 export default authRouter;

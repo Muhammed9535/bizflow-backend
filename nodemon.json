@@ -2,6 +2,5 @@
   "watch": ["src"],
   "ext": "ts",
   "ignore": ["node_modules"],
-  "exec": "tsx src/index.ts",
-  "delay": 500
+  "exec": "tsx src/index.ts"
 }
